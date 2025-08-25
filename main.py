@@ -19,27 +19,37 @@ def exibir_opcoes():
     print('4. Sair\n')
 
 
+def opcao_invalida():
+    print('Opcao invalida\n')
+    input('Digite alguma tecla para reiniciar o programa')
+    main()
+
+
 def finalizar_app():
     os.system('cls')
-    print('Finalizando app')
+    print('Finalizando app\n')
 
 
 def escolher_opcoes():
-    opcao_escolhida = int(input('Escolha uma opcao: '))
-    # print(f'Voce escolheu a opcao: {opcao_escolhida}')
-    if opcao_escolhida == 1:
-        print('Cadastrar restaurante')
-    elif opcao_escolhida == 2:
-        print('Listar restaurante')
-    elif opcao_escolhida == 3:
-        print('Ativar restaurante')
-    elif opcao_escolhida == 4:
-        finalizar_app()
-    else:
-        print('Opcao invalida')
+    try:
+        opcao_escolhida = int(input('Escolha uma opcao: '))
+        # print(f'Voce escolheu a opcao: {opcao_escolhida}')
+        if opcao_escolhida == 1:
+            print('Cadastrar restaurante')
+        elif opcao_escolhida == 2:
+            print('Listar restaurante')
+        elif opcao_escolhida == 3:
+            print('Ativar restaurante')
+        elif opcao_escolhida == 4:
+            finalizar_app()
+        else:
+            opcao_invalida()
+    except:
+        opcao_invalida()
 
 
 def main():
+    os.system('cls')
     exibir_nome_do_programa()
     exibir_opcoes()
     escolher_opcoes()
