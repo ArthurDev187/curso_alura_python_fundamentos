@@ -1,5 +1,9 @@
 import os
-restaurantes = []
+restaurantes = [
+    {'nome': 'Restaurante da tia Raimunda',
+     'categoria': 'Comida caseira', 
+     'ativo': True}
+]
 
 def exibir_nome_do_programa():
     print("""
@@ -19,6 +23,23 @@ def exibir_opcoes():
     print('3. Ativar restaurante')
     print('4. Sair\n')
 
+
+def atualizar_restaurante():
+    imprimir_subtitulo('Vamos atualizar o restaurante')
+    nome_restaurante_atualizar = input('Digite o nome do restaurante que deseja atualizar: ')
+    for restaurante in restaurantes:
+        if nome_restaurante_atualizar.lower() == restaurante['nome'].lower():
+            try: 
+                print('1=nome, 2=categoria, 3=ativo')
+                qual_atualizar = int(input('Digite o numero do item que deseja atualizar: '))
+                match qual_atualizar:
+                    case 1:
+                        nome_antigo = restaurante['nome']
+                        nome_novo = input('Digite o novo nome do restaurante: ')
+                        restaurante['nome'] = nome_novo
+                        print(f'O restaurante de nome: {nome_antigo}, teve o nome atualizado para: {nome_novo}')
+            except:
+                pass
 
 def finalizar_app():
     os.system('cls')
@@ -44,7 +65,9 @@ def imprimir_subtitulo(texto):
 def cadastrar_restaurante():
     imprimir_subtitulo('Cadastrando restaurante')
     nome_restaurante = input('Digite o nome do restaurante que voce deseja cadastrar: ')
-    restaurantes.append(nome_restaurante)
+    categoria_restaurante = input('Digite a categoria do restaurante: ')
+    dados_restaurante = {'Nome': nome_restaurante, 'categoria': categoria_restaurante, 'ativo': False}
+    restaurantes.append(dados_restaurante)
     print(f'Restaurante {nome_restaurante}, foi cadastrado com sucesso.')
     retornar_para_menu_principal()
 
