@@ -21,7 +21,8 @@ def exibir_opcoes():
     print('1. Cadastrar restaurante')
     print('2. Listar restaurante')
     print('3. Ativar restaurante')
-    print('4. Sair\n')
+    print('4. Editar restaurante')
+    print('5. Sair\n')
 
 
 def atualizar_restaurante():
@@ -29,17 +30,30 @@ def atualizar_restaurante():
     nome_restaurante_atualizar = input('Digite o nome do restaurante que deseja atualizar: ')
     for restaurante in restaurantes:
         if nome_restaurante_atualizar.lower() == restaurante['nome'].lower():
-            try: 
-                print('1=nome, 2=categoria, 3=ativo')
-                qual_atualizar = int(input('Digite o numero do item que deseja atualizar: '))
-                match qual_atualizar:
-                    case 1:
-                        nome_antigo = restaurante['nome']
-                        nome_novo = input('Digite o novo nome do restaurante: ')
-                        restaurante['nome'] = nome_novo
-                        print(f'O restaurante de nome: {nome_antigo}, teve o nome atualizado para: {nome_novo}')
-            except:
-                pass
+            print('1=nome, 2=categoria, 3=ativo')
+            qual_atualizar = int(input('Digite o numero do item que deseja atualizar: '))
+            match qual_atualizar:
+                case 1:
+                    nome_antigo = restaurante['nome']
+                    nome_novo = input('Digite o novo nome do restaurante: ')
+                    restaurante['nome'] = nome_novo
+                    print(f'O restaurante de nome: {nome_antigo}, teve o nome atualizado para: {nome_novo}')
+                case 2:
+                    categoria_antiga = restaurante['categoria']
+                    categoria_nova = input('Digite o nome da nova categoria: ')
+                    restaurante['categoria'] = categoria_nova
+                    print(f'A categoria: {categoria_antiga} do restaurante: {restaurante['nome']}, foi atualizada para: {categoria_nova}.')
+                case 3:
+                    escolha_ativar = input('Voce deseja ativar o restaurante? (S)/(N) ')
+                    if escolha_ativar.upper() == 'S':
+                        restaurante['ativo'] = True
+                        print(f'Restaurante {restaurante['nome']} foi ativado.')
+                    else:
+                        restaurante['ativo'] = False
+                        print(f'Restaurante {restaurante['nome']} foi desativado.')
+
+    retornar_para_menu_principal()
+
 
 def finalizar_app():
     os.system('cls')
@@ -90,6 +104,8 @@ def escolher_opcoes():
         elif opcao_escolhida == 3:
             print('Ativar restaurante')
         elif opcao_escolhida == 4:
+            atualizar_restaurante()
+        elif opcao_escolhida == 5:
             finalizar_app()
         else:
             opcao_invalida()
